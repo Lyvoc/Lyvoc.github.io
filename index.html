@@ -18,7 +18,7 @@
       <h4>Steps to export all the attributes of each User from an AD</h4>
 
         1. Open a powershell on the Active Directory<br>
-        2. Run the command:<br> <code>Get-ADUser -Filter * -Properties * | Select * | Export-csv -NoTypeInformation -encoding unicode ((Get-Location | Select -ExpandProperty Path) + "\" + "exported_users.csv")</code><br>
+        2. Run the command:<br> <code>Get-ADUser -Filter * -Properties * | Select-Object @{Name="StreetAddress_Clean"; Expression= {$_.StreetAddress -replace "`r?`n","|"}},* -ExcludeProperty StreetAddress | Export-Csv "c:\exported_users.csv"  -Encoding Unicode -NoTypeInformation</code><br>
     </div>
 
     <div class="bd-callout">
